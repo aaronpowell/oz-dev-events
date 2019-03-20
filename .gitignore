@@ -1,3 +1,4 @@
 node_modules
 dist
 .gocache
+src/markdown-tools/app/debug

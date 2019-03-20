@@ -62,8 +62,13 @@ func makeEvent(row *ast.TableRow) *Event {
 			txt := cell.GetChildren()[0].(*ast.Text)
 			event.DateFrom = getContent(txt)
 		case 3:
-			txt := cell.GetChildren()[0].(*ast.Text)
-			event.DateTo = getContent(txt)
+			c := cell.GetChildren()
+			if len(c) == 0 {
+				event.DateTo = event.DateFrom
+			} else {
+				txt := c[0].(*ast.Text)
+				event.DateTo = getContent(txt)
+			}
 		case 6:
 			txt := cell.GetChildren()[0].(*ast.Text)
 			tags := strings.Split(getContent(txt), ",")

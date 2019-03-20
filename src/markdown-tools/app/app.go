@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	resp, err := http.Get("https://raw.githubusercontent.com/Readify/DevEvents/master/readme.md")
+	resp, err := http.Get("https://raw.githubusercontent.com/Readify/DevEvents/master/2018.md")
 	if err != nil {
 		println(err)
 	} else {

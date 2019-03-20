@@ -1,0 +1,21 @@
+table {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    margin: 20px 0px;
+    padding: 20px;
+    width: 100%;
+
+    font-family: 'Fira Code'
+}
+
+table th i {
+    float: right;
+}
+
+table td {
+    padding: 5px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #ccc;
+}

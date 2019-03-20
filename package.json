@@ -13,6 +13,7 @@
   "author": "Aaron Powell",
   "license": "MIT",
   "devDependencies": {
+    "@types/lodash.sortby": "^4.7.6",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^2.1.1",
     "golang-wasm-async-loader": "^0.4.0",
@@ -27,6 +28,7 @@
   "dependencies": {
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
+    "lodash.sortby": "^4.7.0",
     "moment": "^2.24.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
