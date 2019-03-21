@@ -13,6 +13,7 @@ variables:
 steps:
 - script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "go1.12.tar.gz"
+    mkdir '$(system.defaultWorkingDirectory)/.local-go'
     tar -C '$(system.defaultWorkingDirectory)/.local-go' -xzf "go1.12.tar.gz"
   displayName: 'Install Go 1.12'
 
