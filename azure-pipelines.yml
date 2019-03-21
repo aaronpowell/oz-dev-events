@@ -14,8 +14,6 @@ steps:
 - script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "go1.12.tar.gz"
     tar -C '$(system.defaultWorkingDirectory)' -xzf "go1.12.tar.gz"
-    ls '$(system.defaultWorkingDirectory)'
-    ls '$(system.defaultWorkingDirectory)/go'
   displayName: 'Install Go 1.12'
 
 - script: |
@@ -30,6 +28,7 @@ steps:
   displayName: 'Set up the Go workspace'
 
 - script: |
+    which go
     go version
     go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
   workingDirectory: '$(modulePath)'
