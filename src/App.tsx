@@ -35,7 +35,7 @@ class App extends React.Component<{}, AppState> {
                 })
             );
 
-        downloadYear('2017', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2018.md')
+        downloadYear('2017', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2017.md')
             .then(year =>
                 this.setState({
                     years: [...this.state.years, year],
@@ -43,7 +43,7 @@ class App extends React.Component<{}, AppState> {
                 })
             );
 
-        downloadYear('2016', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2018.md')
+        downloadYear('2016', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2016.md')
             .then(year =>
                 this.setState({
                     years: [...this.state.years, year],
