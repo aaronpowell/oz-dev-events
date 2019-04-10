@@ -32,7 +32,7 @@ class Table extends React.Component<ITableProps, ITableState> {
     }
 
     filterByState(filter: string) {
-        let events = this.state.allEvents.filter(e => e.state === filter);
+        let events = filter ? this.state.allEvents.filter(e => e.state === filter) : this.state.allEvents;
 
         this.setState({
             events: performSort(
@@ -82,7 +82,7 @@ class Table extends React.Component<ITableProps, ITableState> {
                     </td>
                     <td>{event.state}</td>
                     <td>{event.fromDate.format('dddd, MMMM Do YYYY')} {event.toDate.isSame(event.fromDate) ? '' : `to ${event.toDate.format('dddd, MMMM Do YYYY')}`}</td>
-                    <td>{event.tags.join(', ')}</td>
+                    <td>{(event.tags || []).join(', ')}</td>
                 </tr>
             );
         });
@@ -106,7 +106,7 @@ class Table extends React.Component<ITableProps, ITableState> {
                             <br />
                             <select onChange={e => this.filterByState(e.target.value)}>
                                 <option value="">Filter...</option>
-                                {events.map(e => e.state)
+                                {this.state.allEvents.map(e => e.state)
                                 .reduce((u, c) => u.includes(c) ? u : [...u, c], [])
                                 .map(s => <option value={s} key={s}>{s}</option>)}
                             </select>
