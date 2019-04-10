@@ -52,9 +52,13 @@ func makeEvent(row *ast.TableRow) *Event {
 	for i, cell := range cells {
 		switch i {
 		case 0:
-			link := cell.GetChildren()[1].(*ast.Link)
-			event.Name = getContent(link.GetChildren()[0].(*ast.Text))
-			event.Link = string(link.Destination)
+			if len(cell.GetChildren()) > 1 {
+				link := cell.GetChildren()[1].(*ast.Link)
+				event.Name = getContent(link.GetChildren()[0].(*ast.Text))
+				event.Link = string(link.Destination)
+			} else {
+				event.Name = getContent(cell.GetChildren()[0].(*ast.Text))
+			}
 		case 1:
 			txt := cell.GetChildren()[0].(*ast.Text)
 			event.State = getContent(txt)
