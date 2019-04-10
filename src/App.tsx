@@ -54,7 +54,12 @@ class App extends React.Component<{}, AppState> {
 
     render() {
         return (
-            <div>
+            <div className="container">
+                <h1 className="title">Australian Technology Events</h1>
+                <p className="subtitle">
+                    Welcome to the Australia Technology Events list.
+                    This website provides a easy to interact with view of the data maintained by <a href="https://github.com/readify/devevents" target="_blank">Readify</a> and built by <a href="https://www.aaron-powell.com" target="_blank">Aaron Powell</a> as an <a href="https://github.com/aaronpowell/oz-dev-events" target="_blank">experiment using WebAssembly and Go.</a>
+                </p>
                 {this.state.loading ?
                     <Loader /> :
                     sortBy(this.state.years, 'year').reverse().map(year => <Table year={year} key={year.year} />)}

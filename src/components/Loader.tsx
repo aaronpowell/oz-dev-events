@@ -3,7 +3,7 @@ import './Loader.css';
 
 const Loader = () => {
     return (
-        <div className="loader">
+        <div className="spinner">
             <i className="fas fa-circle-notch"></i>
         </div>
     );

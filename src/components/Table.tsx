@@ -88,7 +88,7 @@ class Table extends React.Component<ITableProps, ITableState> {
         });
         
         return (
-            <table key={year.year}>
+            <table key={year.year} className="table is-striped">
                 <thead>
                     <tr>
                         <th colSpan={4}>{year.year}</th>
@@ -99,26 +99,32 @@ class Table extends React.Component<ITableProps, ITableState> {
                             {this.sortIndicator('name')}
                         </th>
                         <th>
-                            <span onClick={() => this.sortColumn('state')}>
-                                State
-                                {this.sortIndicator('state')}
-                            </span>
-                            <br />
-                            <select onChange={e => this.filterByState(e.target.value)}>
-                                <option value="">Filter...</option>
-                                {this.state.allEvents.map(e => e.state)
-                                .reduce((u, c) => u.includes(c) ? u : [...u, c], [])
-                                .map(s => <option value={s} key={s}>{s}</option>)}
-                            </select>
+                            <div>
+                                <span onClick={() => this.sortColumn('state')}>
+                                    State
+                                    {this.sortIndicator('state')}
+                                </span>
+                            </div>
+                            <div className="select">
+                                <select onChange={e => this.filterByState(e.target.value)}>
+                                    <option value="">Filter...</option>
+                                    {this.state.allEvents.map(e => e.state)
+                                    .reduce((u, c) => u.includes(c) ? u : [...u, c], [])
+                                    .map(s => <option value={s} key={s}>{s}</option>)}
+                                </select>
+                            </div>
                         </th>
                         <th onClick={() => this.sortColumn('fromDate')}>
                             When
                             {this.sortIndicator('fromDate')}
                         </th>
                         <th>
-                            Tags
-                            <br />
-                            <input type="search" onChange={e => this.filterByTags(e.target.value)} />
+                            <div className="control has-icons-right">
+                                <input className="input is-rounded" placeholder="Tags..." type="search" onChange={e => this.filterByTags(e.target.value)} />
+                                <span className="icon is-small is-right">
+                                    <i className="fas fa-search"></i>
+                                </span>
+                            </div>
                         </th>
                     </tr>
                 </thead>
