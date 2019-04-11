@@ -30,6 +30,7 @@ steps:
 
 - script: |
     which go
+    ls -R $(GOROOT)
     go version
     go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
   workingDirectory: '$(modulePath)'
