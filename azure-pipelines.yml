@@ -34,18 +34,18 @@ steps:
   workingDirectory: '$(modulePath)'
   displayName: 'Get dependencies'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
 
 - script: |
     pwd
     ls -la $(Build.SourcesDirectory)
     npm install
-    npm run build
+    npx webpack
   displayName: 'npm install and build'
-  workingDirectory: $(Build.SourcesDirectory)
+  # workingDirectory: $(Build.SourcesDirectory)
 
 - task: CopyFiles@2
   inputs:
