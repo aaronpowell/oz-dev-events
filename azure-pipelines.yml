@@ -14,11 +14,9 @@ steps:
 - script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(Agent.BuildDirectory)/go1.12.tar.gz"
     tar -C '$(Agent.BuildDirectory)' -xzf "$(Agent.BuildDirectory)/go1.12.tar.gz"
-    ls -la '$(Agent.BuildDirectory)'
   displayName: 'Install Go 1.12'
 
 - script: |
-    ls -la '$(Agent.BuildDirectory)'
     mkdir -p '$(GOBIN)'
     mkdir -p '$(GOPATH)/pkg'
     mkdir -p '$(modulePath)'
@@ -31,11 +29,8 @@ steps:
   displayName: 'Set up the Go workspace'
 
 - script: |
-    which go
-    ls -la '$(Agent.BuildDirectory)'
-    ls -R '$(GOROOT)'
-    go version
-    go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
+    GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
+    go get github.com/gomarkdown/markdown
   workingDirectory: '$(modulePath)'
   displayName: 'Get dependencies'
 
