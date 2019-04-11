@@ -29,6 +29,7 @@ steps:
   displayName: 'Set up the Go workspace'
 
 - script: |
+    ls -la $(Build.SourcesDirectory)
     GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
     go get github.com/gomarkdown/markdown
   workingDirectory: '$(modulePath)'
