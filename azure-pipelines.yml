@@ -47,7 +47,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)/dist'
+    sourceFolder: '$(modulePath)/dist'
     contents: '**' 
     targetFolder: $(Build.ArtifactStagingDirectory)
 
