@@ -5,9 +5,9 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  GOBIN:  '$(GOPATH)/bin' # Go binaries path
-  GOROOT: '$(system.defaultWorkingDirectory)/go' # Go installation path
   GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
+  GOROOT: '$(system.defaultWorkingDirectory)/go' # Go installation path
+  GOBIN:  '$(GOPATH)/bin' # Go binaries path
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
 steps:
