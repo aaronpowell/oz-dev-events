@@ -5,20 +5,20 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
-  GOROOT: '$(system.defaultWorkingDirectory)/go' # Go installation path
+  GOPATH: '$(Agent.BuildDirectory)/gopath' # Go workspace path
+  GOROOT: '$(Agent.BuildDirectory)/go' # Go installation path
   GOBIN:  '$(GOPATH)/bin' # Go binaries path
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
 steps:
 - script: |
-    wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
-    tar -C '$(system.defaultWorkingDirectory)' -xzf "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
-    ls -la '$(system.defaultWorkingDirectory)'
+    wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(Agent.BuildDirectory)/go1.12.tar.gz"
+    tar -C '$(Agent.BuildDirectory)' -xzf "$(Agent.BuildDirectory)/go1.12.tar.gz"
+    ls -la '$(Agent.BuildDirectory)'
   displayName: 'Install Go 1.12'
 
 - script: |
-    ls -la '$(system.defaultWorkingDirectory)'
+    ls -la '$(Agent.BuildDirectory)'
     mkdir -p '$(GOBIN)'
     mkdir -p '$(GOPATH)/pkg'
     mkdir -p '$(modulePath)'
@@ -32,7 +32,7 @@ steps:
 
 - script: |
     which go
-    ls -la '$(system.defaultWorkingDirectory)'
+    ls -la '$(Agent.BuildDirectory)'
     ls -R '$(GOROOT)'
     go version
     go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
