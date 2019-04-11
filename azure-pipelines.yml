@@ -40,11 +40,11 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    pwd
-    ls -laR
+    ls -la $(Build.SourcesDirectory)
     npm install
     npm run build
   displayName: 'npm install and build'
+  workingDirectory: $(Build.SourcesDirectory)
 
 - task: CopyFiles@2
   inputs:
