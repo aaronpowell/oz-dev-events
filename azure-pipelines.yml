@@ -41,6 +41,7 @@ steps:
 
 - script: |
     pwd
+    ls -la
     npm install
     npm run build
   workingDirectory: $(system.defaultWorkingDirectory)
