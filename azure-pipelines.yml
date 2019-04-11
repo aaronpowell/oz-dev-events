@@ -41,10 +41,9 @@ steps:
 
 - script: |
     pwd
-    ls -la
+    ls -laR
     npm install
     npm run build
-  workingDirectory: $(system.defaultWorkingDirectory)
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
