@@ -88,7 +88,7 @@ class Table extends React.Component<ITableProps, ITableState> {
         });
         
         return (
-            <table key={year.year} className="table is-striped">
+            <table key={year.year} className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
                         <th colSpan={4}>{year.year}</th>
