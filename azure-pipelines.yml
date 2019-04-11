@@ -40,6 +40,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    pwd
     npm install
     npm run build
   workingDirectory: $(system.defaultWorkingDirectory)
