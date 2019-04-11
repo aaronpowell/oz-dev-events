@@ -12,6 +12,10 @@ variables:
 
 steps:
 - script: |
+    ls -la $(Build.SourcesDirectory)
+  displayName: 'Trying to found the source code...'
+
+- script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(Agent.BuildDirectory)/go1.12.tar.gz"
     tar -C '$(Agent.BuildDirectory)' -xzf "$(Agent.BuildDirectory)/go1.12.tar.gz"
   displayName: 'Install Go 1.12'
@@ -29,11 +33,10 @@ steps:
   displayName: 'Set up the Go workspace'
 
 - script: |
-    ls -la $(Build.SourcesDirectory)
     GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
     go get github.com/gomarkdown/markdown
   workingDirectory: '$(modulePath)'
-  displayName: 'Get dependencies'
+  displayName: 'Get Go dependencies'
 
 # - task: NodeTool@0
 #   inputs:
