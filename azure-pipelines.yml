@@ -14,7 +14,6 @@ steps:
 - script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
     tar -C '$(system.defaultWorkingDirectory)' -xvzf "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
-    ls '$(system.defaultWorkingDirectory)'
   displayName: 'Install Go 1.12'
 
 - script: |
@@ -31,8 +30,8 @@ steps:
 
 - script: |
     which go
-    ls $(system.defaultWorkingDirectory)
-    ls -R $(GOROOT)
+    ls '$(system.defaultWorkingDirectory)'
+    ls -R '$(GOROOT)'
     go version
     go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
   workingDirectory: '$(modulePath)'
