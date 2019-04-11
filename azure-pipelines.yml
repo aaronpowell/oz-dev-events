@@ -41,6 +41,10 @@ steps:
   displayName: 'Trying to found the source code...'
 
 - script: |
+    ls -la $(modulePath)
+  displayName: 'what is in the module path?'
+
+- script: |
     GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
     go get github.com/gomarkdown/markdown
   workingDirectory: '$(modulePath)'
