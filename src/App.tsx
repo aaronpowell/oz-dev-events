@@ -10,7 +10,8 @@ import YearComponent from './pages/Year';
 
 interface AppState {
     years: Year[],
-    loading: Boolean
+    loading: Boolean,
+    showHamburger: boolean
 }
 
 class App extends React.Component<{}, AppState> {
@@ -18,7 +19,8 @@ class App extends React.Component<{}, AppState> {
         super(props);
         this.state = {
             years: [],
-            loading: true
+            loading: true,
+            showHamburger: false
         };
     }
 
@@ -66,14 +68,14 @@ class App extends React.Component<{}, AppState> {
                                 Australian Tech Events
                             </span>
 
-                            <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
+                            <a role="button" className={`navbar-burger ${this.state.showHamburger ? 'is-active' : '' }`} aria-label="menu" aria-expanded="false" data-target="navbar" onClick={() => this.setState({ showHamburger: !this.state.showHamburger })}>
                                 <span aria-hidden="true"></span>
                                 <span aria-hidden="true"></span>
                                 <span aria-hidden="true"></span>
                             </a>
                         </div>
 
-                        <div className="navbar-menu">
+                        <div id="navbar" className={`navbar-menu ${this.state.showHamburger ? 'is-active' : '' }`}>
                             <div className="navbar-start">
                                 <Link to="/" className="navbar-item">Home</Link>
                                 <Link to="/about" className="navbar-item">About</Link>
