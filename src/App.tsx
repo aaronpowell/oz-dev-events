@@ -3,6 +3,10 @@ import downloadYear, { Year } from './fetch-events';
 import Table from './components/Table';
 import Loader from './components/Loader';
 import sortBy from 'lodash.sortby';
+import { BrowserRouter as Router, Route, Link, RouteComponentProps } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import YearComponent from './pages/Year';
 
 interface AppState {
     years: Year[],
@@ -22,7 +26,7 @@ class App extends React.Component<{}, AppState> {
         downloadYear('2019', 'https://raw.githubusercontent.com/Readify/DevEvents/master/readme.md')
             .then(year =>
                 this.setState({
-                    years: [...this.state.years, year],
+                    years: sortBy([...this.state.years, year], 'year').reverse(),
                     loading: false
                 })
             );
@@ -30,7 +34,7 @@ class App extends React.Component<{}, AppState> {
         downloadYear('2018', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2018.md')
             .then(year =>
                 this.setState({
-                    years: [...this.state.years, year],
+                    years: sortBy([...this.state.years, year], 'year').reverse(),
                     loading: false
                 })
             );
@@ -38,7 +42,7 @@ class App extends React.Component<{}, AppState> {
         downloadYear('2017', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2017.md')
             .then(year =>
                 this.setState({
-                    years: [...this.state.years, year],
+                    years: sortBy([...this.state.years, year], 'year').reverse(),
                     loading: false
                 })
             );
@@ -46,7 +50,7 @@ class App extends React.Component<{}, AppState> {
         downloadYear('2016', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2016.md')
             .then(year =>
                 this.setState({
-                    years: [...this.state.years, year],
+                    years: sortBy([...this.state.years, year], 'year').reverse(),
                     loading: false
                 })
             );
@@ -54,16 +58,43 @@ class App extends React.Component<{}, AppState> {
 
     render() {
         return (
-            <div className="container">
-                <h1 className="title">Australian Technology Events</h1>
-                <p className="subtitle">
-                    Welcome to the Australia Technology Events list.
-                    This website provides a easy to interact with view of the data maintained by <a href="https://github.com/readify/devevents" target="_blank">Readify</a> and built by <a href="https://www.aaron-powell.com" target="_blank">Aaron Powell</a> as an <a href="https://github.com/aaronpowell/oz-dev-events" target="_blank">experiment using WebAssembly and Go.</a>
-                </p>
-                {this.state.loading ?
-                    <Loader /> :
-                    sortBy(this.state.years, 'year').reverse().map(year => <Table year={year} key={year.year} />)}
-            </div>
+            <Router>
+                <div className="container">
+                    <nav className="navbar" role="navigation" aria-label="main navigation">
+                        <div className="navbar-brand">
+                            <span className="navbar-item">
+                                Australian Tech Events
+                            </span>
+
+                            <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div className="navbar-menu">
+                            <div className="navbar-start">
+                                <Link to="/" className="navbar-item">Home</Link>
+                                <Link to="/about" className="navbar-item">About</Link>
+                                {!this.state.loading &&
+                                    <div className="navbar-item has-dropdown is-hoverable">
+                                        <a className="navbar-link">
+                                            Years
+                                        </a>
+
+                                        <div className="navbar-dropdown">
+                                            {this.state.years.map(year => <Link className="navbar-item" to={`/year/${year.year}`} key={year.year}>{year.year}</Link>)}
+                                        </div>
+                                    </div>}
+                            </div>
+                        </div>
+                    </nav>
+                    <Route exact path="/" component={() => <Home loading={this.state.loading} years={this.state.years} />} />
+                    <Route path="/about" component={About} />
+                    <Route path="/year/:year" component={(props: RouteComponentProps<{ year: string }>) => <YearComponent year={this.state.years.filter(year => year.year === props.match.params.year)[0]} loading={this.state.loading} />} />
+                </div>
+            </Router>
         );
     }
 }

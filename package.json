@@ -14,6 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash.sortby": "^4.7.6",
+    "@types/react-router-dom": "^4.3.1",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^2.1.1",
     "golang-wasm-async-loader": "^0.4.0",
@@ -31,6 +32,7 @@
     "lodash.sortby": "^4.7.0",
     "moment": "^2.24.0",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-router-dom": "^5.0.0"
   }
 }
