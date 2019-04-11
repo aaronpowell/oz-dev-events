@@ -12,17 +12,9 @@ variables:
 
 steps:
 - script: |
-    ls -la $(Build.SourcesDirectory)
-  displayName: 'Trying to found the source code...'
-
-- script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(Agent.BuildDirectory)/go1.12.tar.gz"
     tar -C '$(Agent.BuildDirectory)' -xzf "$(Agent.BuildDirectory)/go1.12.tar.gz"
   displayName: 'Install Go 1.12'
-
-- script: |
-    ls -la $(Build.SourcesDirectory)
-  displayName: 'Trying to found the source code...'
 
 - script: |
     mkdir -p '$(GOBIN)'
@@ -37,31 +29,21 @@ steps:
   displayName: 'Set up the Go workspace'
 
 - script: |
-    ls -la $(Build.SourcesDirectory)
-  displayName: 'Trying to found the source code...'
-
-- script: |
-    ls -la $(modulePath)
-  displayName: 'what is in the module path?'
-
-- script: |
     GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
     go get github.com/gomarkdown/markdown
   workingDirectory: '$(modulePath)'
   displayName: 'Get Go dependencies'
 
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '10.x'
-#   displayName: 'Install Node.js'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
 
 - script: |
-    pwd
-    ls -la $(Build.SourcesDirectory)
     npm install
     npx webpack
   displayName: 'npm install and build'
-  # workingDirectory: $(Build.SourcesDirectory)
+  workingDirectory: $(modulePath)
 
 - task: CopyFiles@2
   inputs:
