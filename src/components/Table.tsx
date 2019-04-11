@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Year, Event } from '../fetch-events';
 import './table.css';
 import sortBy from 'lodash.sortby';
+import moment = require('moment');
 
 interface ITableProps {
     year: Year
@@ -12,6 +13,9 @@ interface ITableState {
     allEvents: Event[]
     direction: 'asc' | 'desc'
     column: string
+    selectedState: string
+    tagFilter: string
+    hidePastEvents: boolean
 }
 
 const performSort = (field: string, direction: string, events: Event[]) =>
@@ -27,38 +31,46 @@ class Table extends React.Component<ITableProps, ITableState> {
             events: events,
             allEvents: events,
             column: 'fromDate',
-            direction: 'asc'
+            selectedState: '',
+            direction: 'desc',
+            tagFilter: '',
+            hidePastEvents: false
         };
     }
 
-    filterByState(filter: string) {
-        let events = filter ? this.state.allEvents.filter(e => e.state === filter) : this.state.allEvents;
+    componentDidUpdate(prevProps: ITableProps, prevState: ITableState) {
+        if (prevState.column === this.state.column &&
+            prevState.direction === this.state.direction &&
+            prevState.hidePastEvents === this.state.hidePastEvents &&
+            prevState.tagFilter === this.state.tagFilter &&
+            prevState.selectedState === this.state.selectedState) {
+            return;
+        }
+
+        let events = this.state.allEvents
+                        .filter(e => this.state.hidePastEvents ? e.fromDate.isAfter(moment()) : true)
+                        .filter(e => this.state.selectedState ? e.state === this.state.selectedState : true)
+                        .filter(e => this.state.tagFilter ? e.tags.some(t => t.toLowerCase().indexOf(this.state.tagFilter.toLowerCase()) >= 0) : true)
 
         this.setState({
-            events: performSort(
-                this.state.column,
-                this.state.direction === 'asc' ? 'desc' : 'asc',
-                events
-            )
+            events: performSort(this.state.column, this.state.direction, events)
+        });
+    }
+
+    filterByState(filter: string) {
+        this.setState({
+            selectedState: filter
         });
     }
 
     filterByTags(filter: string) {
-        let events = this.state.allEvents
-                        .filter(e => e.tags.some(t => t.toLowerCase().indexOf(filter.toLowerCase()) >= 0));
-
         this.setState({
-            events: performSort(
-                this.state.column,
-                this.state.direction === 'asc' ? 'desc' : 'asc',
-                events
-            )
+            tagFilter: filter
         });
     }
 
     sortColumn(column: string) {
         this.setState({
-            events: performSort(column, this.state.direction, this.state.events),
             column: column,
             direction: this.state.direction === 'asc' ? 'desc' : 'asc'
         });
@@ -69,6 +81,12 @@ class Table extends React.Component<ITableProps, ITableState> {
             return this.state.direction === 'asc' ? <i className="fas fa-sort-up"></i> : <i className="fas fa-sort-down"></i>;
         }
         return null;
+    }
+
+    togglePastEvents(checked: boolean) {
+        this.setState({
+            hidePastEvents: checked
+        });
     }
 
     render() {
@@ -114,9 +132,17 @@ class Table extends React.Component<ITableProps, ITableState> {
                                 </select>
                             </div>
                         </th>
-                        <th onClick={() => this.sortColumn('fromDate')}>
-                            When
-                            {this.sortIndicator('fromDate')}
+                        <th>
+                            <div onClick={() => this.sortColumn('fromDate')}>
+                                When
+                                {this.sortIndicator('fromDate')}
+                            </div>
+                            <div>
+                                <label className="checkbox">
+                                    <input type="checkbox" onChange={(e) => this.togglePastEvents(e.target.checked)} />
+                                    Hide past events
+                                </label>
+                            </div>
                         </th>
                         <th>
                             <div className="control has-icons-right">
