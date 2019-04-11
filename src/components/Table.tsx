@@ -139,7 +139,7 @@ class Table extends React.Component<ITableProps, ITableState> {
                             </div>
                             <div>
                                 <label className="checkbox">
-                                    <input type="checkbox" onChange={(e) => this.togglePastEvents(e.target.checked)} />
+                                    <input type="checkbox" onChange={(e) => this.togglePastEvents(e.target.checked)} />{' '}
                                     Hide past events
                                 </label>
                             </div>
