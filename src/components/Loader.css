@@ -3,7 +3,7 @@
     text-align: center;
 }
 
-.spinner svg {
+.spinner i {
     animation: spinner .6s linear infinite;
     font-size: 36px;
 }
