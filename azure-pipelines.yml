@@ -21,6 +21,10 @@ steps:
   displayName: 'Install Go 1.12'
 
 - script: |
+    ls -la $(Build.SourcesDirectory)
+  displayName: 'Trying to found the source code...'
+
+- script: |
     mkdir -p '$(GOBIN)'
     mkdir -p '$(GOPATH)/pkg'
     mkdir -p '$(modulePath)'
@@ -31,6 +35,10 @@ steps:
     echo '##vso[task.prependpath]$(GOBIN)'
     echo '##vso[task.prependpath]$(GOROOT)/bin'
   displayName: 'Set up the Go workspace'
+
+- script: |
+    ls -la $(Build.SourcesDirectory)
+  displayName: 'Trying to found the source code...'
 
 - script: |
     GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
