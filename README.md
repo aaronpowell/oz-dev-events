@@ -1,6 +1,6 @@
 # Australian Tech Events
 
-[![Build Status](https://aaronpowell.visualstudio.com/Australian Dev Events/_apis/build/status/aaronpowell.oz-dev-events?branchName=master)](https://aaronpowell.visualstudio.com/Australian Dev Events/_build/latest?definitionId=23&branchName=master)
+[![Build Status](https://aaronpowell.visualstudio.com/Australian%20Dev%20Events/_apis/build/status/aaronpowell.oz-dev-events?branchName=master&label=🔨Built%20with%20Azure)](https://aaronpowell.visualstudio.com/Australian%20Dev%20Events/_build/latest?definitionId=23&branchName=master)
 
 This is the source code for the [Australian Tech Events](https://ozdevevents.z8.web.core.windows.net/) website, a web UI over the top of the [Readify DevEvents](https://github.com/readify/devevents) markdown files.
 
