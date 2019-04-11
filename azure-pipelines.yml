@@ -14,7 +14,7 @@ steps:
 - script: |
     wget "https://storage.googleapis.com/golang/go1.12.linux-amd64.tar.gz" --output-document "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
     tar -C '$(system.defaultWorkingDirectory)' -xvzf "$(system.defaultWorkingDirectory)/go1.12.tar.gz"
-    ls '$(system.defaultWorkingDirectory)''
+    ls '$(system.defaultWorkingDirectory)'
   displayName: 'Install Go 1.12'
 
 - script: |
