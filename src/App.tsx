@@ -1,7 +1,5 @@
 import * as React from 'react';
 import downloadYear, { Year } from './fetch-events';
-import Table from './components/Table';
-import Loader from './components/Loader';
 import sortBy from 'lodash.sortby';
 import { BrowserRouter as Router, Route, Link, RouteComponentProps } from 'react-router-dom';
 import Home from './pages/Home';
