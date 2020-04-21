@@ -23,7 +23,7 @@ class App extends React.Component<{}, AppState> {
     }
 
     async componentDidMount() {
-        downloadYear('2019', 'https://raw.githubusercontent.com/Readify/DevEvents/master/readme.md')
+        downloadYear('2020', 'https://raw.githubusercontent.com/Readify/DevEvents/master/readme.md')
             .then(year =>
                 this.setState({
                     years: sortBy([...this.state.years, year], 'year').reverse(),
@@ -31,7 +31,7 @@ class App extends React.Component<{}, AppState> {
                 })
             );
 
-        downloadYear('2018', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2018.md')
+        downloadYear('2019', 'https://raw.githubusercontent.com/Readify/DevEvents/master/Events/2019.md')
             .then(year =>
                 this.setState({
                     years: sortBy([...this.state.years, year], 'year').reverse(),
@@ -39,7 +39,7 @@ class App extends React.Component<{}, AppState> {
                 })
             );
 
-        downloadYear('2017', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2017.md')
+            downloadYear('2018', 'https://raw.githubusercontent.com/Readify/DevEvents/master/Events/2018.md')
             .then(year =>
                 this.setState({
                     years: sortBy([...this.state.years, year], 'year').reverse(),
@@ -47,7 +47,15 @@ class App extends React.Component<{}, AppState> {
                 })
             );
 
-        downloadYear('2016', 'https://raw.githubusercontent.com/Readify/DevEvents/master/2016.md')
+        downloadYear('2017', 'https://raw.githubusercontent.com/Readify/DevEvents/master/Events/2017.md')
+            .then(year =>
+                this.setState({
+                    years: sortBy([...this.state.years, year], 'year').reverse(),
+                    loading: false
+                })
+            );
+
+        downloadYear('2016', 'https://raw.githubusercontent.com/Readify/DevEvents/master/Events/2016.md')
             .then(year =>
                 this.setState({
                     years: sortBy([...this.state.years, year], 'year').reverse(),
