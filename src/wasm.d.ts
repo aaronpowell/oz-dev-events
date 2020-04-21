@@ -1,8 +1,10 @@
 declare module "*.go" {
-    interface GoWrapper {
-        [K: string]: <T = any, R = any>(...params: T[]) => Promise<R>
-    }
+  interface GoWrapper {
+    [TKey: string]: <TParams = any, TReturn = any>(
+      ...params: TParams[]
+    ) => Promise<TReturn>;
+  }
 
-    var _: GoWrapper
-    export default _
+  var _: GoWrapper;
+  export default _;
 }
