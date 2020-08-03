@@ -1,0 +1,12 @@
+{
+    "name": "Oz Tech Events",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "extensions": [
+        "golang.go",
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig"
+      ],
+    "forwardPorts": [9000]
+}
