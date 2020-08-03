@@ -7,5 +7,4 @@ RUN wget -c https://dl.google.com/go/go1.12.17.linux-amd64.tar.gz -O - | tar -xz
 ENV GOROOT=/usr/local/go GOPATH="$HOME/go" PATH="${PATH}:/usr/local/go/bin"
 
 RUN go get github.com/gomarkdown/markdown && \
-    GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge && \
-    npm install
+    GOOS=js GOARCH=wasm go get github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge
